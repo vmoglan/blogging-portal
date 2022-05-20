@@ -18,7 +18,7 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "start": "ember serve",
+    "start": "ember server",
     "test": "npm-run-all lint test:*",
     "test:ember": "ember test"
   },
@@ -28,6 +28,7 @@
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
     "babel-eslint": "^10.1.0",
+    "bootstrap": "^5.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "ember-auto-import": "^2.4.1",
     "ember-cli": "~4.3.0",
@@ -36,11 +37,13 @@
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-htmlbars": "^6.0.1",
     "ember-cli-inject-live-reload": "^2.1.0",
+    "ember-cli-sass": "^11.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.2",
     "ember-data": "~4.3.0",
     "ember-export-application-global": "^2.0.1",
     "ember-fetch": "^8.1.1",
+    "ember-jquery": "^1.0.5",
     "ember-load-initializers": "^2.1.2",
     "ember-page-title": "^7.0.0",
     "ember-qunit": "^5.1.5",
@@ -59,6 +62,7 @@
     "prettier": "^2.6.1",
     "qunit": "^2.18.0",
     "qunit-dom": "^2.0.0",
+    "sass": "^1.51.0",
     "webpack": "^5.70.0"
   },
   "engines": {
@@ -67,5 +71,9 @@
   "ember": {
     "edition": "octane"
   },
-  "main": "index.js"
+  "dependencies": {
+    "ember-bootstrap": "^5.1.0",
+    "ember-cookies": "^0.5.2",
+    "jquery": "^3.6.0"
+  }
 }
