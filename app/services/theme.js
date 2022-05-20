@@ -4,24 +4,6 @@ import { inject as service } from '@ember/service';
 export default class ThemeService extends Service {
   @service cookies;
 
-  constructor() {
-    super(...arguments);
-
-    const cookies = this.cookies;
-
-    if (!cookies.exists('theme')) {
-      this._toggleLightMode();
-    } else {
-      const theme = cookies.read();
-
-      if (theme === 'dark') {
-        this._toggleDarkMode();
-      } else {
-        this._toggleLightMode();
-      }
-    }
-  }
-
   _toggleDarkMode() {
     if (!document.body.classList.contains('dark')) {
       document.body.classList.add('dark');
@@ -36,6 +18,22 @@ export default class ThemeService extends Service {
     }
 
     this.theme = 'light';
+  }
+
+  initialize() {
+    const cookies = this.cookies;
+
+    if (!cookies.exists('theme')) {
+      this._toggleLightMode();
+    } else {
+      const theme = cookies.read('theme');
+
+      if (theme === 'dark') {
+        this._toggleDarkMode();
+      } else {
+        this._toggleLightMode();
+      }
+    }
   }
 
   toggle() {
