@@ -2,18 +2,18 @@
     <div class="mb-3 row">
         <label for="staticEmail" class="col-sm-3 col-form-label">Email:</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="staticEmail" placeholder="email@example.com">
+            <Input @type="text" @value={{this.username}} class="form-control" id="staticEmail" placeholder="email@example.com" />
         </div>
     </div>
 
     <div class="mb-3 row">
         <label for="inputPassword" class="col-sm-3 col-form-label">Password:</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Secret123!">
+            <Input @type="password" @value={{this.password}} class="form-control" id="inputPassword" placeholder="Secret123!" />
         </div>
     </div>
 
     <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">Login</button>
+        <LinkTo @route="user-feed" class="btn btn-primary mb-3" {{on 'click' this.login}}>Login</LinkTo>
     </div>
 </div>
