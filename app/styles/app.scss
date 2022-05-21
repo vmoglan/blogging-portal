@@ -68,3 +68,9 @@ html, body {
   --#{$variable-prefix}body-color: #{$body-color};
   --#{$variable-prefix}body-bg: #{$body-bg};
 }
+
+.login-box {
+  max-width: 600px;
+  max-height: 400px;
+  margin: auto;
+}

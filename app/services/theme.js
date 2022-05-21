@@ -1,48 +1,66 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
+import { tracked } from '@glimmer/tracking';
 
 export default class ThemeService extends Service {
   @service cookies;
+  
+  @tracked currentTheme;
 
-  _toggleDarkMode() {
+  initialize() {
+    const theme = this._getPreferredTheme();
+    this.setTheme(theme, false);
+  }
+
+  _getPreferredTheme() {
+    const cookies = this.cookies;
+
+    if (cookies.exists('theme')) {
+      const theme = cookies.read('theme');
+
+      if (theme === 'dark' || theme === 'light') {
+        return theme;
+      } else {
+        return 'light';
+      }
+    }
+
+    return 'light';
+  }
+
+  toggleTheme() {
+    if (this.theme === 'dark') {
+      this.setTheme('light')
+    } else {
+      this.setTheme('dark');
+    }
+  }
+
+  setTheme(theme, setCookies = true) {
+    if (theme === 'dark') {
+      this._enableDarkMode();
+    } else {
+      this._disableDarkMode();
+    }
+
+    if (setCookies) {
+      this.cookies.write('theme', this.currentTheme);
+    }
+  }
+
+  _enableDarkMode() {
     if (!document.body.classList.contains('dark')) {
       document.body.classList.add('dark');
     }
 
-    this.theme = 'dark';
+    this.currentTheme = 'dark';
   }
 
-  _toggleLightMode() {
+  _disableDarkMode() {
     if (document.body.classList.contains('dark')) {
       document.body.classList.remove('dark');
     }
 
-    this.theme = 'light';
-  }
-
-  initialize() {
-    const cookies = this.cookies;
-
-    if (!cookies.exists('theme')) {
-      this._toggleLightMode();
-    } else {
-      const theme = cookies.read('theme');
-
-      if (theme === 'dark') {
-        this._toggleDarkMode();
-      } else {
-        this._toggleLightMode();
-      }
-    }
-  }
-
-  toggle() {
-    if (this.theme === 'dark') {
-      this._toggleLightMode();
-    } else {
-      this._toggleDarkMode();
-    }
-
-    this.cookies.write('theme', this.theme);
+    this.currentTheme = 'light';
   }
 }
